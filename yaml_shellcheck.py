@@ -337,7 +337,7 @@ def select_yaml_schema(documents, filename):
     elif isinstance(data, dict) and "on" in data and "jobs" in data:
         logging.info(f"read {filename} as GitHub Workflows config...")
         return get_github_scripts, 0
-    elif isinstance(data, dict) and "inputs" in data and "runs" in data:
+    elif isinstance(data, dict) and "runs" in data:
         logging.info(f"read {filename} as GitHub Actions config...")
         return get_github_scripts, 0
     elif isinstance(data, dict) and "version" in data and "jobs" in data:
