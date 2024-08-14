@@ -13,6 +13,10 @@ and (very limited) [Ansible](https://docs.ansible.com/ansible/2.9/modules/shell_
 
 ## Usage
 
+```sh
+docker run -v `pwd`:`pwd` --rm ghcr.io/lukaw3d/yaml-shellcheck:main  `pwd`/.github/**/*.y*ml
+```
+
 ### Shell
 
 Needs Python 3 with library [ruamel.yaml](https://pypi.org/project/ruamel.yaml/),
