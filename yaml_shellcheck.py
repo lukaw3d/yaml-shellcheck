@@ -42,7 +42,7 @@ def setup():
         "-s",
         "--shell",
         help="default shebang line to add to shell script snippets (default: '#!/bin/sh -e')",
-        default="#!/bin/sh -e",
+        default="#!/bin/bash -e",
         type=str,
     )
     parser.add_argument(
