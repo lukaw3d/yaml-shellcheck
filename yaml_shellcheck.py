@@ -151,9 +151,10 @@ def get_github_scripts(data):
         return results
 
     result = {}
-    if "jobs" not in data:
+    if "jobs" not in data and "runs" not in data:
         return result
-    result = get_runs(data["jobs"], "jobs")
+
+    result = get_runs(data["jobs"], "jobs") if "jobs" in data else get_runs(data["runs"], "runs")
     logging.debug("got scripts: %s", result)
     for key in result:
         logging.debug("%s: %s", key, result[key])
@@ -334,6 +335,9 @@ def select_yaml_schema(documents, filename):
         logging.info(f"read {filename} as Bitbucket Pipelines config...")
         return get_bitbucket_scripts, 0
     elif isinstance(data, dict) and "on" in data and "jobs" in data:
+        logging.info(f"read {filename} as GitHub Workflows config...")
+        return get_github_scripts, 0
+    elif isinstance(data, dict) and "inputs" in data and "runs" in data:
         logging.info(f"read {filename} as GitHub Actions config...")
         return get_github_scripts, 0
     elif isinstance(data, dict) and "version" in data and "jobs" in data:
