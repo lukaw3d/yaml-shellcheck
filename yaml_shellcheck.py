@@ -394,7 +394,7 @@ def write_tmp_files(args, data):
     outdir = Path(args.outdir)
     outdir.mkdir(exist_ok=True, parents=True)
     for filename in data:
-        subdir = outdir / filename
+        subdir = outdir / ('a/'+filename)
         # remove all '..' elements from the tmp file paths
         if ".." in subdir.parts:
             parts = filter(lambda a: a != "..", list(subdir.parts))
