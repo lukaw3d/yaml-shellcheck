@@ -131,6 +131,10 @@ def get_github_scripts(data):
                 # we try to be useful and replace these with a simple shell variable
                 script = re.sub(r"\${{.*}}", "$ACTION_EXPRESSION", script)
 
+                # $GITHUB_OUTPUT | ${GITHUB_OUTPUT} shouldn't need to be double quoted
+                script = re.sub(r"\$\{GITHUB_OUTPUT\}", "$GITHUB_OUTPUT", script)
+                script = re.sub(r"(?<!\")\$GITHUB_OUTPUT(?!\")", "\"$GITHUB_OUTPUT\"", script)
+
                 results[f"{path}/run"] = script
 
             for key in data:
